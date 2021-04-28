@@ -4,6 +4,7 @@ namespace JoshPJackson\OpenApi\Paths\PathItem\Operation;
 
 use JoshPJackson\OpenApi\Schema;
 use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
+use JoshPJackson\OpenApi\Traits\HasRequiredFields;
 
 /**
  * Class Parameter
@@ -12,6 +13,12 @@ use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
 class Parameter implements \JsonSerializable
 {
     use CanJsonSerialise;
+    use HasRequiredFields;
+
+    protected array $requiredFields = [
+        'name',
+        'in'
+    ];
 
     /**
      * @var string

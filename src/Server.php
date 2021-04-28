@@ -3,6 +3,7 @@
 namespace JoshPJackson\OpenApi;
 
 use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
+use JoshPJackson\OpenApi\Traits\HasRequiredFields;
 
 /**
  * Class Server
@@ -11,6 +12,14 @@ use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
 class Server implements \JsonSerializable
 {
     use CanJsonSerialise;
+    use HasRequiredFields;
+
+    /**
+     * @var array|string[]
+     */
+    protected array $required = [
+        'url'
+    ];
 
     /**
      * @var string

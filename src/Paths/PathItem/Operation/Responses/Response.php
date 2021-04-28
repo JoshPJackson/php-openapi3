@@ -4,6 +4,7 @@ namespace JoshPJackson\OpenApi\Paths\PathItem\Operation\Responses;
 
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\RequestBody\MediaType;
 use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
+use JoshPJackson\OpenApi\Traits\HasRequiredFields;
 
 /**
  * Class Response
@@ -12,6 +13,14 @@ use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
 class Response implements \JsonSerializable
 {
     use CanJsonSerialise;
+    use HasRequiredFields;
+
+    /**
+     * @var array|string[]
+     */
+    protected array $requiredFields = [
+        'description'
+    ];
 
     /**
      * @var string

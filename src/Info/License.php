@@ -3,6 +3,7 @@
 namespace JoshPJackson\OpenApi\Info;
 
 use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
+use JoshPJackson\OpenApi\Traits\HasRequiredFields;
 
 /**
  * Class License
@@ -11,6 +12,14 @@ use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
 class License implements \JsonSerializable
 {
     use CanJsonSerialise;
+    use HasRequiredFields;
+
+    /**
+     * @var array|string[] 
+     */
+    protected array $required = [
+        'name'
+    ];
 
     /**
      * @var string

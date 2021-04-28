@@ -11,14 +11,14 @@ trait HasRequiredFields
     /**
      * @var array
      */
-    protected array $required = [];
+    protected array $requiredFields = [];
 
     /**
      * @return bool
      */
     protected function validate() : bool
     {
-        foreach ($this->required as $requiredField) {
+        foreach ($this->requiredFields as $requiredField) {
             if (empty($requiredField)) {
                 return false;
             }
