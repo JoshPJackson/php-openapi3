@@ -17,7 +17,7 @@ class Server implements \JsonSerializable
     /**
      * @var array|string[]
      */
-    protected array $required = [
+    protected array $requiredFields = [
         'url'
     ];
 

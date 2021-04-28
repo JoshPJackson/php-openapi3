@@ -18,7 +18,7 @@ class OpenApi implements \JsonSerializable
     /**
      * @var array|string[]
      */
-    protected array $required = [
+    protected array $requiredFields = [
         'openapi',
         'info'
     ];

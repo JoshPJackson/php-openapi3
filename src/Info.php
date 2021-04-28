@@ -16,7 +16,7 @@ class Info implements \JsonSerializable
     use CanJsonSerialise;
     use HasRequiredFields;
 
-    protected array $required = [
+    protected array $requiredFields = [
         'title',
         'version'
     ];

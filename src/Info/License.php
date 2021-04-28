@@ -17,7 +17,7 @@ class License implements \JsonSerializable
     /**
      * @var array|string[] 
      */
-    protected array $required = [
+    protected array $requiredFields = [
         'name'
     ];
 

@@ -15,7 +15,7 @@ class ClientCredentialsFlow extends OAuthFlow
     /**
      * @var array|string[]
      */
-    protected array $required = [
+    protected array $requiredFields = [
         'tokenUrl'
     ];
 

@@ -18,7 +18,7 @@ class SecurityScheme implements \JsonSerializable
         HasRequiredFields::validate as traitValidate;
     }
 
-    protected array $required = [
+    protected array $requiredFields = [
         'type',
     ];
 
