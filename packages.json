@@ -1,0 +1,8 @@
+{
+  "name": "joshpjackson12/php-openapi3",
+  "version": "1.0.0",
+  "dist": {
+    "url": "https://github.com/JoshPJackson/php-openapi3/archive/refs/heads/master.zip",
+    "type": "zip"
+  }
+}
