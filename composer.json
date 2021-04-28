@@ -1,5 +1,5 @@
 {
-    "name": "joshpjackson12/php-openapi",
+    "name": "joshpjackson/php-openapi3",
     "description": "Simple php library to produce openapi json library",
     "type": "library",
     "license": "MIT",
