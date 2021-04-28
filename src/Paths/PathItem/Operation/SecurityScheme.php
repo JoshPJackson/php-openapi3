@@ -1,6 +1,6 @@
 <?php
 
-namespace JoshPJackson\OpenApi\Paths\PathItem\Openation;
+namespace JoshPJackson\OpenApi\Paths\PathItem\Operation;
 
 use JoshPJackson\OpenApi\Paths\PathItem\Openation\SecurityScheme\OAuthFlows;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\SecurityScheme\Type;
