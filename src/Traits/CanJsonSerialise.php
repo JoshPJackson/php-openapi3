@@ -32,7 +32,7 @@ trait CanJsonSerialise
                 if (!is_object($value)) {
                     $this->jsonArray[$name] = $value;
                 } else {
-                    $this->jsonArray[$name] = $value->jsonSerialize();
+                    $this->jsonArray[$name] = json_decode($value->jsonSerialize());
                 }
             }
         }
