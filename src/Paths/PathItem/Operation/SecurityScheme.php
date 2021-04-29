@@ -2,14 +2,14 @@
 
 namespace JoshPJackson\OpenApi\Paths\PathItem\Operation;
 
-use JoshPJackson\OpenApi\Paths\PathItem\Openation\SecurityScheme\OAuthFlows;
+use JoshPJackson\OpenApi\Paths\PathItem\operation\SecurityScheme\OAuthFlows;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\SecurityScheme\Type;
 use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
 use JoshPJackson\OpenApi\Traits\HasRequiredFields;
 
 /**
  * Class SecurityScheme
- * @package JoshPJackson\OpenApi\Paths\PathItem\Openation
+ * @package JoshPJackson\OpenApi\Paths\PathItem\operation
  */
 class SecurityScheme implements \JsonSerializable
 {
