@@ -28,11 +28,13 @@ trait CanJsonSerialise
         }
 
         foreach (get_object_vars($this) as $name => $value) {
-            if (!empty($value)) {
-                if (!is_object($value)) {
-                    $this->jsonArray[$name] = $value;
-                } else {
-                    $this->jsonArray[$name] = json_decode($value->jsonSerialize());
+            if ($name != 'requiredFields') {
+                if (!empty($value)) {
+                    if (!is_object($value)) {
+                        $this->jsonArray[$name] = $value;
+                    } else {
+                        $this->jsonArray[$name] = json_decode($value->jsonSerialize());
+                    }
                 }
             }
         }
