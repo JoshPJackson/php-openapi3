@@ -2,7 +2,7 @@
 
 namespace JoshPJackson\OpenApi\Schema;
 
-use JoshPJackson\OpenApi\Arrayable\Arrayable;
+use JoshPJackson\OpenApi\Interfaces\Arrayable;
 use JoshPJackson\OpenApi\Schema;
 use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
 use JoshPJackson\OpenApi\Type;
@@ -11,64 +11,14 @@ use JoshPJackson\OpenApi\Type;
  * Class Property
  * @package JoshPJackson\OpenApi\Schema
  */
-class Property implements \JsonSerializable, Arrayable
+class Property extends Schema implements \JsonSerializable, Arrayable
 {
     use CanJsonSerialise;
 
     /**
-     * @var string
-     */
-    private string $type;
-
-    /**
-     * @var string
-     */
-    private string $format;
-
-    /**
-     * @var string
-     */
-    private string $ref;
-
-    /**
-     * @var Schema
-     */
-    private Schema $allOf;
-
-    /**
-     * @var Schema
-     */
-    private Schema $oneOf;
-
-    /**
-     * @var Schema
-     */
-    private Schema $not;
-
-    /**
-     * @var array
-     */
-    private array $items;
-
-    /**
-     * @var array
-     */
-    private array $properties;
-
-    /**
-     * @var array
-     */
-    private array $additionalProperties;
-
-    /**
-     * @var string
-     */
-    private string $description;
-
-    /**
      * Property constructor.
      * @param string $name
-     * @param Type $types
+     * @param Type $type
      */
     public function __construct(private string $name, Type $type)
     {

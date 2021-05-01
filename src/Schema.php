@@ -17,147 +17,152 @@ class Schema implements \JsonSerializable, Arrayable
     /**
      * @var bool
      */
-    private bool $nullable = true;
+    protected bool $nullable = true;
 
     /**
      * @var bool
      */
-    private bool $readOnly = false;
+    protected bool $readOnly = false;
 
     /**
      * @var bool
      */
-    private bool $writeOnly = false;
+    protected bool $writeOnly = false;
 
     /**
      * @var string
      */
-    private string $title;
+    protected string $title;
 
     /**
      * @var int|float
      */
-    private mixed $multipleOf;
+    protected mixed $multipleOf;
 
     /**
      * @var int|float
      */
-    private mixed $maximum;
+    protected mixed $maximum;
 
     /**
      * @var int|float
      */
-    private mixed $exclusiveMaximum;
+    protected mixed $exclusiveMaximum;
 
     /**
      * @var int|float
      */
-    private mixed $minimum;
+    protected mixed $minimum;
 
     /**
      * @var int|float
      */
-    private mixed $exclusiveMinimum;
+    protected mixed $exclusiveMinimum;
 
     /**
      * @var int
      */
-    private int $maxLength;
+    protected int $maxLength;
 
     /**
      * @var int
      */
-    private int $minLength;
+    protected int $minLength;
 
     /**
      * @var string
      */
-    private string $pattern;
+    protected string $pattern;
 
     /**
      * @var int
      */
-    private int $maxItems;
+    protected int $maxItems;
 
     /**
      * @var int
      */
-    private int $minItems;
+    protected int $minItems;
 
     /**
      * @var bool
      */
-    private bool $uniqueItems;
+    protected bool $uniqueItems;
 
     /**
      * @var int
      */
-    private int $maxProperties;
+    protected int $maxProperties;
 
     /**
      * @var int
      */
-    private int $minProperties;
+    protected int $minProperties;
 
     /**
      * @var array
      */
-    private array $required;
+    protected array $required;
 
     /**
      * @var array
      */
-    private array $enum;
+    protected array $enum;
 
     /**
-     * @var Type
+     * @var string
      */
-    private Type $type;
-
-    /**
-     * @var array
-     */
-    private array $allOf;
+    protected string $type;
 
     /**
      * @var array
      */
-    private array $oneOf;
+    protected array $allOf;
 
     /**
      * @var array
      */
-    private array $anyOf;
+    protected array $oneOf;
 
     /**
      * @var array
      */
-    private array $not;
+    protected array $anyOf;
 
     /**
      * @var array
      */
-    private array $items;
+    protected array $not;
+
+    /**
+     * @var array
+     */
+    protected array $items;
 
     /**
      * @var Property[]
      */
-    private array $properties;
+    protected array $properties;
 
     /**
      * @var Property[]
      */
-    private array $additionalProperties;
+    protected array $additionalProperties;
 
     /**
      * @var string
      */
-    private string $description;
+    protected string $description;
 
     /**
      * @var Schema
      */
-    private Schema $default;
+    protected Schema $default;
+
+    /**
+     * @var string
+     */
+    protected string $format;
 
     /**
      * @return bool
@@ -502,18 +507,18 @@ class Schema implements \JsonSerializable, Arrayable
     }
 
     /**
-     * @return Type
+     * @return string
      */
-    public function getType(): Type
+    public function getType(): String
     {
         return $this->type;
     }
 
     /**
-     * @param Type $type
+     * @param string $type
      * @return Schema
      */
-    public function setType(Type $type): Schema
+    public function setType(string $type): Schema
     {
         $this->type = $type;
         return $this;
@@ -678,6 +683,24 @@ class Schema implements \JsonSerializable, Arrayable
     public function setDefault(Schema $default): Schema
     {
         $this->default = $default;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFormat(): string
+    {
+        return $this->format;
+    }
+
+    /**
+     * @param string $format
+     * @return Schema
+     */
+    public function setFormat(string $format): Schema
+    {
+        $this->format = $format;
         return $this;
     }
 
