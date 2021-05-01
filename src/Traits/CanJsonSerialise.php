@@ -8,12 +8,7 @@ namespace JoshPJackson\OpenApi\Traits;
  */
 trait CanJsonSerialise
 {
-    /**
-     * Holds json serialised data
-     *
-     * @var array
-     */
-    protected array $jsonArray = [];
+    use IsArrayable;
 
     /**
      * @return string
@@ -21,24 +16,6 @@ trait CanJsonSerialise
      */
     public function jsonSerialize() : string
     {
-        if (method_exists($this, 'validate')) {
-            if (!$this->validate()) {
-                throw new \Exception(get_class($this) . ' missing one of more required fields');
-            }
-        }
-
-        foreach (get_object_vars($this) as $name => $value) {
-            if ($name != 'requiredFields') {
-                if (!empty($value)) {
-                    if (!is_object($value)) {
-                        $this->jsonArray[$name] = $value;
-                    } else {
-                        $this->jsonArray[$name] = json_decode($value->jsonSerialize());
-                    }
-                }
-            }
-        }
-
-        return json_encode($this->jsonArray);
+        return json_encode($this->toArray());
     }
 }

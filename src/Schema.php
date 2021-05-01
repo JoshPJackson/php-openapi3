@@ -2,13 +2,15 @@
 
 namespace JoshPJackson\OpenApi;
 
+use JoshPJackson\OpenApi\Interfaces\Arrayable;
+use JoshPJackson\OpenApi\Schema\Property;
 use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
 
 /**
  * Class Schema
  * @package JoshPJackson\OpenApi
  */
-class Schema implements \JsonSerializable
+class Schema implements \JsonSerializable, Arrayable
 {
     use CanJsonSerialise;
 
@@ -138,12 +140,12 @@ class Schema implements \JsonSerializable
     private array $items;
 
     /**
-     * @var array
+     * @var Property[]
      */
     private array $properties;
 
     /**
-     * @var array
+     * @var Property[]
      */
     private array $additionalProperties;
 
@@ -619,9 +621,9 @@ class Schema implements \JsonSerializable
      * @param array $properties
      * @return Schema
      */
-    public function setProperties(array $properties): Schema
+    public function addProperty(Property $properties): Schema
     {
-        $this->properties = $properties;
+        $this->properties[] = $properties;
         return $this;
     }
 
@@ -634,12 +636,12 @@ class Schema implements \JsonSerializable
     }
 
     /**
-     * @param array $additionalProperties
+     * @param Property $additionalProperty
      * @return Schema
      */
-    public function setAdditionalProperties(array $additionalProperties): Schema
+    public function addAdditionalProperties(Property $additionalProperty): Schema
     {
-        $this->additionalProperties = $additionalProperties;
+        $this->additionalProperties[] = $additionalProperty;
         return $this;
     }
 
@@ -677,5 +679,26 @@ class Schema implements \JsonSerializable
     {
         $this->default = $default;
         return $this;
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    public function jsonSerialize(): string
+    {
+        $array = $this->toArray();
+        $array['properties'] = [];
+        $array['additionalProperties'] = [];
+
+        foreach ($this->properties as $property) {
+            $array['properties'][$property->getName()] = $property->toArray();
+        }
+
+        foreach ($this->additionalProperties as $additionalProperty) {
+            $array['additionalProperties'][$additionalProperty->getName()] = $additionalProperty->toArray();
+        }
+
+        return json_encode($array);
     }
 }

@@ -2,14 +2,16 @@
 
 namespace JoshPJackson\OpenApi\Schema;
 
+use JoshPJackson\OpenApi\Arrayable\Arrayable;
 use JoshPJackson\OpenApi\Schema;
 use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
+use JoshPJackson\OpenApi\Type;
 
 /**
  * Class Property
  * @package JoshPJackson\OpenApi\Schema
  */
-class Property implements \JsonSerializable
+class Property implements \JsonSerializable, Arrayable
 {
     use CanJsonSerialise;
 
@@ -62,6 +64,17 @@ class Property implements \JsonSerializable
      * @var string
      */
     private string $description;
+
+    /**
+     * Property constructor.
+     * @param string $name
+     * @param Type $types
+     */
+    public function __construct(private string $name, Type $type)
+    {
+        $this->setType($type->getType());
+        $this->setFormat($type->getFormat());
+    }
 
     /**
      * @return string
@@ -241,5 +254,24 @@ class Property implements \JsonSerializable
     {
         $this->description = $description;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName() : string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        $array = $this->toArray();
+        unset ($array['name']);
+
+        return $array;
     }
 }
