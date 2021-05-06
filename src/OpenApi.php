@@ -60,15 +60,24 @@ class OpenApi implements JsonSerializable
 	 */
 	private Collection $tags;
 
-    /**
-     * @return string
-     */
-    public function getOpenapi(): string
-    {
-        return $this->openapi;
-    }
+	/**
+	 * OpenApi constructor.
+	 */
+	public function __construct()
+	{
+		$this->servers = new Collection();
+		$this->securities = new Collection();
+	}
 
-    /**
+	/**
+	 * @return string
+	 */
+	public function getOpenapi(): string
+	{
+		return $this->openapi;
+	}
+
+	/**
      * @param string $openapi
      * @return OpenApi
      */
