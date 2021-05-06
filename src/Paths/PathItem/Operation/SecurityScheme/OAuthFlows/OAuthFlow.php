@@ -2,23 +2,24 @@
 
 namespace JoshPJackson\OpenApi\Paths\PathItem\Operation\SecurityScheme\OAuthFlows;
 
-use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
+use JoshPJackson\OpenApi\Interfaces\Arrayable;
+use JoshPJackson\OpenApi\Traits\IsArrayable;
 
 /**
  * Class OAuthFlow
  * @package JoshPJackson\OpenApi\Paths\PathItem\Operation\SecurityScheme\OAuthFlows
  */
-class OAuthFlow implements \JsonSerializable
+class OAuthFlow implements Arrayable
 {
-    use CanJsonSerialise;
+	use IsArrayable;
 
-    /**
-     * @var string
-     */
-    protected string $refreshUrl;
+	/**
+	 * @var string
+	 */
+	protected string $refreshUrl;
 
-    /**
-     * @var array
+	/**
+	 * @var array
      */
     protected array $scopes;
 

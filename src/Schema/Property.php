@@ -2,29 +2,25 @@
 
 namespace JoshPJackson\OpenApi\Schema;
 
-use JoshPJackson\OpenApi\Interfaces\Arrayable;
 use JoshPJackson\OpenApi\Schema;
-use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
 use JoshPJackson\OpenApi\Type;
 
 /**
  * Class Property
  * @package JoshPJackson\OpenApi\Schema
  */
-class Property extends Schema implements \JsonSerializable, Arrayable
+class Property extends Schema
 {
-    use CanJsonSerialise;
-
-    /**
-     * Property constructor.
-     * @param string $name
-     * @param Type $type
-     */
-    public function __construct(private string $name, Type $type)
-    {
-        $this->setType($type->getType());
-        $this->setFormat($type->getFormat());
-    }
+	/**
+	 * Property constructor.
+	 * @param string $name
+	 * @param Type $type
+	 */
+	public function __construct(private string $name, Type $type)
+	{
+		parent::__construct();
+		$this->setTypeAndFormatFromType($type);
+	}
 
     /**
      * @return string
@@ -47,24 +43,6 @@ class Property extends Schema implements \JsonSerializable, Arrayable
     /**
      * @return string
      */
-    public function getFormat(): string
-    {
-        return $this->format;
-    }
-
-    /**
-     * @param string $format
-     * @return Property
-     */
-    public function setFormat(string $format): Property
-    {
-        $this->format = $format;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
     public function getRef(): string
     {
         return $this->ref;
@@ -77,60 +55,6 @@ class Property extends Schema implements \JsonSerializable, Arrayable
     public function setRef(string $ref): Property
     {
         $this->ref = $ref;
-        return $this;
-    }
-
-    /**
-     * @return Schema
-     */
-    public function getAllOf(): Schema
-    {
-        return $this->allOf;
-    }
-
-    /**
-     * @param Schema $allOf
-     * @return Property
-     */
-    public function setAllOf(Schema $allOf): Property
-    {
-        $this->allOf = $allOf;
-        return $this;
-    }
-
-    /**
-     * @return Schema
-     */
-    public function getOneOf(): Schema
-    {
-        return $this->oneOf;
-    }
-
-    /**
-     * @param Schema $oneOf
-     * @return Property
-     */
-    public function setOneOf(Schema $oneOf): Property
-    {
-        $this->oneOf = $oneOf;
-        return $this;
-    }
-
-    /**
-     * @return Schema
-     */
-    public function getNot(): Schema
-    {
-        return $this->not;
-    }
-
-    /**
-     * @param Schema $not
-     * @return Property
-     */
-    public function setNot(Schema $not): Property
-    {
-        $this->not = $not;
         return $this;
     }
 
@@ -149,42 +73,6 @@ class Property extends Schema implements \JsonSerializable, Arrayable
     public function setItems(array $items): Property
     {
         $this->items = $items;
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getProperties(): array
-    {
-        return $this->properties;
-    }
-
-    /**
-     * @param array $properties
-     * @return Property
-     */
-    public function setProperties(array $properties): Property
-    {
-        $this->properties = $properties;
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getAdditionalProperties(): array
-    {
-        return $this->additionalProperties;
-    }
-
-    /**
-     * @param array $additionalProperties
-     * @return Property
-     */
-    public function setAdditionalProperties(array $additionalProperties): Property
-    {
-        $this->additionalProperties = $additionalProperties;
         return $this;
     }
 
@@ -219,7 +107,7 @@ class Property extends Schema implements \JsonSerializable, Arrayable
      */
     public function toArray(): array
     {
-        $array = $this->toArray();
+		$array = $this->IsArrayableToArray();
         unset ($array['name']);
 
         return $array;

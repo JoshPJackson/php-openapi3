@@ -2,7 +2,6 @@
 
 namespace JoshPJackson\OpenApi;
 
-use Illuminate\Support\Collection;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\SecurityScheme;
 use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
 use JoshPJackson\OpenApi\Traits\HasRequiredFields;

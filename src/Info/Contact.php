@@ -2,23 +2,24 @@
 
 namespace JoshPJackson\OpenApi\Info;
 
-use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
+use JoshPJackson\OpenApi\Interfaces\Arrayable;
+use JoshPJackson\OpenApi\Traits\IsArrayable;
 
 /**
  * Class Contact
  * @package JoshPJackson\OpenApi\Info
  */
-class Contact implements \JsonSerializable
+class Contact implements Arrayable
 {
-    use CanJsonSerialise;
+	use IsArrayable;
 
-    /**
-     * @var string
-     */
-    private string $name;
+	/**
+	 * @var string
+	 */
+	private string $name;
 
-    /**
-     * @var string
+	/**
+	 * @var string
      */
     private string $url;
 

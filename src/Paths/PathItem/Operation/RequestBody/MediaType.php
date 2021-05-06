@@ -2,21 +2,22 @@
 
 namespace JoshPJackson\OpenApi\Paths\PathItem\Operation\RequestBody;
 
-use JoshPJackson\OpenApi\Schema;
+use JoshPJackson\OpenApi\Interfaces\Arrayable;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\RequestBody\MediaType\Encoding;
-use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
+use JoshPJackson\OpenApi\Schema;
+use JoshPJackson\OpenApi\Traits\IsArrayable;
 
-class MediaType implements \JsonSerializable
+class MediaType implements Arrayable
 {
-    use CanJsonSerialise;
+	use IsArrayable;
 
-    /**
-     * @var Schema
-     */
-    private Schema $schema;
+	/**
+	 * @var Schema
+	 */
+	private Schema $schema;
 
-    /**
-     * @var
+	/**
+	 * @var
      */
     private $example;
 

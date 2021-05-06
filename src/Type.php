@@ -2,25 +2,26 @@
 
 namespace JoshPJackson\OpenApi;
 
-use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
+use JoshPJackson\OpenApi\Interfaces\Arrayable;
+use JoshPJackson\OpenApi\Traits\IsArrayable;
 
 /**
  * Class Type
  * @package JoshPJackson\OpenApi
  */
-class Type implements \JsonSerializable
+class Type implements Arrayable
 {
-    use CanJsonSerialise;
+	use IsArrayable;
 
-    /**
-     * @var string
-     */
-    private string $type;
+	/**
+	 * @var string
+	 */
+	private string $type;
 
-    /**
-     * @var string
-     */
-    private string $format;
+	/**
+	 * @var ?string
+	 */
+	private ?string $format;
 
     /**
      * @return string
@@ -40,21 +41,21 @@ class Type implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getFormat(): string
-    {
-        return $this->format;
-    }
+	/**
+	 * @return ?string
+	 */
+	public function getFormat(): ?string
+	{
+		return $this->format;
+	}
 
     /**
      * @param string $format
      * @return Type
      */
-    public function setFormat(string $format): Type
-    {
-        $this->format = $format;
-        return $this;
-    }
+	public function setFormat(?string $format): Type
+	{
+		$this->format = $format;
+		return $this;
+	}
 }

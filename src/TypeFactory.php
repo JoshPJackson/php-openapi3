@@ -15,8 +15,8 @@ class TypeFactory
      */
     private static function create(string $type, string $format = null) : Type
     {
-        $typeObject = new Type;
-        $typeObject->setType($type);
+        $typeObject = new Type();
+		$typeObject->setType($type);
         $typeObject->setFormat($format);
 
         return $typeObject;
@@ -99,14 +99,22 @@ class TypeFactory
      */
     public static function dateTime() : Type
     {
-        return self::create('string', 'date-time');
-    }
+		return self::create('string', 'date-time');
+	}
 
-    /**
-     * @return Type
-     */
-    public static function password() : Type
-    {
-        return self::create('string', 'password');
-    }
+	/**
+	 * @return Type
+	 */
+	public static function password(): Type
+	{
+		return self::create('string', 'password');
+	}
+
+	/**
+	 * @return Type
+	 */
+	public static function object(): Type
+	{
+		return self::create('object');
+	}
 }

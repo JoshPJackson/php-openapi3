@@ -2,220 +2,236 @@
 
 namespace JoshPJackson\OpenApi;
 
-use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
+use JoshPJackson\OpenApi\Interfaces\Arrayable;
+use JoshPJackson\OpenApi\Paths\PathItem\Operation\RequestBody;
+use JoshPJackson\OpenApi\Paths\PathItem\Operation\Responses\Response;
+use JoshPJackson\OpenApi\Paths\PathItem\Operation\SecurityScheme;
+use JoshPJackson\OpenApi\Traits\IsArrayable;
 
 /**
  * Class Components
  * @package JoshPJackson\OpenApi
  */
-class Components implements \JsonSerializable
+class Components implements Arrayable
 {
-    use CanJsonSerialise;
+	use IsArrayable;
 
-    /**
-     * @var array
-     */
-    private array $schemas;
+	/**
+	 * @var Collection
+	 */
+	private Collection $schemas;
 
-    /**
-     * @var array
-     */
-    private array $responses;
+	/**
+	 * @var Collection
+	 */
+	private Collection $responses;
 
-    /**
-     * @var array
-     */
-    private array $parameters;
+	/**
+	 * @var Collection
+	 */
+	private Collection $parameters;
 
-    /**
-     * @var array
-     */
-    private array $examples;
+	/**
+	 * @var Collection
+	 */
+	private Collection $examples;
 
-    /**
-     * @var array
-     */
-    private array $requestBodies;
+	/**
+	 * @var Collection
+	 */
+	private Collection $requestBodies;
 
-    /**
-     * @var array
-     */
-    private array $headers;
+	/**
+	 * @var Collection
+	 */
+	private Collection $headers;
 
-    /**
-     * @var array
-     */
-    private array $securitySchemes;
+	/**
+	 * @var Collection
+	 */
+	private Collection $securitySchemes;
 
-    /**
-     * @var array
-     */
-    private array $links;
+	/**
+	 * @var Collection
+	 */
+	private Collection $links;
 
-    /**
-     * @var array
-     */
-    private array $callbacks;
+	/**
+	 * @var Collection
+	 */
+	private Collection $callbacks;
 
-    /**
-     * @return array
-     */
-    public function getSchemas(): array
-    {
-        return $this->schemas;
-    }
+	public function __construct()
+	{
+		$this->schemas = new Collection();
+		$this->callbacks = new Collection();
+		$this->examples = new Collection();
+		$this->links = new Collection();
+		$this->securitySchemes = new Collection();
+		$this->responses = new Collection();
+		$this->parameters = new Collection();
+	}
 
-    /**
-     * @param array $schemas
-     * @return Components
-     */
-    public function setSchemas(array $schemas): Components
-    {
-        $this->schemas = $schemas;
-        return $this;
-    }
+	/**
+	 * @return Collection
+	 */
+	public function getSchemas(): Collection
+	{
+		return $this->schemas;
+	}
 
-    /**
-     * @return array
-     */
-    public function getResponses(): array
-    {
-        return $this->responses;
-    }
+	/**
+	 * @param Schema $schema
+	 * @return Components
+	 */
+	public function addSchema(Schema $schema): Components
+	{
+		$this->schemas[] = $schema;
 
-    /**
-     * @param array $responses
-     * @return Components
-     */
-    public function setResponses(array $responses): Components
-    {
-        $this->responses = $responses;
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * @return array
-     */
-    public function getParameters(): array
-    {
-        return $this->parameters;
-    }
+	/**
+	 * @return Collection
+	 */
+	public function getResponses(): Collection
+	{
+		return $this->responses;
+	}
 
-    /**
-     * @param array $parameters
-     * @return Components
-     */
-    public function setParameters(array $parameters): Components
-    {
-        $this->parameters = $parameters;
-        return $this;
-    }
+	/**
+	 * @param Response $response
+	 * @return Components
+	 */
+	public function addResponse(Response $response): Components
+	{
+		$this->responses[] = $response;
+		return $this;
+	}
 
-    /**
-     * @return array
-     */
-    public function getExamples(): array
-    {
-        return $this->examples;
-    }
+	/**
+	 * @return Collection
+	 */
+	public function getParameters(): Collection
+	{
+		return $this->parameters;
+	}
 
-    /**
-     * @param array $examples
-     * @return Components
-     */
-    public function setExamples(array $examples): Components
-    {
-        $this->examples = $examples;
-        return $this;
-    }
+	/**
+	 * @param Collection $parameter
+	 * @return Components
+	 */
+	public function addParameter(Collection $parameter): Components
+	{
+		$this->parameters[] = $parameter;
+		return $this;
+	}
 
-    /**
-     * @return array
-     */
-    public function getRequestBodies(): array
-    {
-        return $this->requestBodies;
-    }
+	/**
+	 * @return Collection
+	 */
+	public function getExamples(): Collection
+	{
+		return $this->examples;
+	}
 
-    /**
-     * @param array $requestBodies
-     * @return Components
-     */
-    public function setRequestBodies(array $requestBodies): Components
-    {
-        $this->requestBodies = $requestBodies;
-        return $this;
-    }
+	/**
+	 * @param mixed $examples
+	 * @return Components
+	 */
+	public function setExamples(mixed $examples): Components
+	{
+		$this->examples = $examples;
+		return $this;
+	}
 
-    /**
-     * @return array
-     */
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
+	/**
+	 * @return Collection
+	 */
+	public function getRequestBodies(): Collection
+	{
+		return $this->requestBodies;
+	}
 
-    /**
-     * @param array $headers
-     * @return Components
-     */
-    public function setHeaders(array $headers): Components
-    {
-        $this->headers = $headers;
-        return $this;
-    }
+	/**
+	 * @param RequestBody $requestBody
+	 * @return Components
+	 */
+	public function addRequestBody(RequestBody $requestBody): Components
+	{
+		$this->requestBodies[] = $requestBody;
+		return $this;
+	}
 
-    /**
-     * @return array
-     */
-    public function getSecuritySchemes(): array
-    {
-        return $this->securitySchemes;
-    }
+	/**
+	 * @return Collection
+	 */
+	public function getHeaders(): Collection
+	{
+		return $this->headers;
+	}
 
-    /**
-     * @param array $securitySchemes
-     * @return Components
-     */
-    public function setSecuritySchemes(array $securitySchemes): Components
-    {
-        $this->securitySchemes = $securitySchemes;
-        return $this;
-    }
+	/**
+	 * @param Collection $headers
+	 * @return Components
+	 */
+	public function setHeaders(Collection $headers): Components
+	{
+		$this->headers = $headers;
+		return $this;
+	}
 
-    /**
-     * @return array
-     */
-    public function getLinks(): array
-    {
-        return $this->links;
-    }
+	/**
+	 * @return Collection
+	 */
+	public function getSecuritySchemes(): Collection
+	{
+		return $this->securitySchemes;
+	}
 
-    /**
-     * @param array $links
-     * @return Components
-     */
-    public function setLinks(array $links): Components
-    {
-        $this->links = $links;
-        return $this;
-    }
+	/**
+	 * @param SecurityScheme $securityScheme
+	 * @return Components
+	 */
+	public function addSecurityScheme(SecurityScheme $securityScheme): Components
+	{
+		$this->securitySchemes[] = $securityScheme;
+		return $this;
+	}
 
-    /**
-     * @return array
-     */
-    public function getCallbacks(): array
-    {
-        return $this->callbacks;
-    }
+	/**
+	 * @return Collection
+	 */
+	public function getLinks(): Collection
+	{
+		return $this->links;
+	}
 
-    /**
-     * @param array $callbacks
-     * @return Components
-     */
-    public function setCallbacks(array $callbacks): Components
-    {
-        $this->callbacks = $callbacks;
-        return $this;
-    }
+	/**
+	 * @param Collection $links
+	 * @return Components
+	 */
+	public function setLinks(Collection $links): Components
+	{
+		$this->links = $links;
+		return $this;
+	}
+
+	/**
+	 * @return Collection
+	 */
+	public function getCallbacks(): Collection
+	{
+		return $this->callbacks;
+	}
+
+	/**
+	 * @param Collection $callbacks
+	 * @return Components
+	 */
+	public function setCallbacks(Collection $callbacks): Components
+	{
+		$this->callbacks = $callbacks;
+		return $this;
+	}
 }
