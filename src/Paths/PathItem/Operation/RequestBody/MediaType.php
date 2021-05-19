@@ -6,10 +6,13 @@ use JoshPJackson\OpenApi\Interfaces\Arrayable;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\RequestBody\MediaType\Encoding;
 use JoshPJackson\OpenApi\Schema;
 use JoshPJackson\OpenApi\Traits\IsArrayable;
+use function PHPUnit\Framework\returnArgument;
 
 class MediaType implements Arrayable
 {
-	use IsArrayable;
+	use IsArrayable {
+	    IsArrayable::toArray as IsArrayableToArray;
+    }
 
 	/**
 	 * @var Schema
@@ -78,5 +81,14 @@ class MediaType implements Arrayable
     {
         $this->encoding = $encoding;
         return $this;
+    }
+
+    public function toArray(): array
+    {
+        $array = $this->IsArrayableToArray();
+        unset($array['encoding']);
+        return [
+            $this->getEncoding()->getContentType() => $array
+        ];
     }
 }

@@ -41,24 +41,6 @@ class Property extends Schema
     }
 
     /**
-     * @return array
-     */
-    public function getItems(): array
-    {
-        return $this->items;
-    }
-
-    /**
-     * @param array $items
-     * @return Property
-     */
-    public function setItems(array $items): Property
-    {
-        $this->items = $items;
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getDescription(): string

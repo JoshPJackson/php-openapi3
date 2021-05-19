@@ -2,17 +2,18 @@
 
 namespace JoshPJackson\OpenApi\Paths\PathItem\Operation;
 
+use JoshPJackson\OpenApi\Interfaces\Arrayable;
 use JoshPJackson\OpenApi\Schema;
-use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
 use JoshPJackson\OpenApi\Traits\HasRequiredFields;
+use JoshPJackson\OpenApi\Traits\IsArrayable;
 
 /**
  * Class Parameter
  * @package JoshPJackson\OpenApi\Paths\PathItem\Operation
  */
-class Parameter implements \JsonSerializable
+class Parameter implements Arrayable
 {
-    use CanJsonSerialise;
+    use IsArrayable;
     use HasRequiredFields;
 
     protected array $requiredFields = [
@@ -54,6 +55,30 @@ class Parameter implements \JsonSerializable
      * @var Schema
      */
     private Schema $schema;
+
+    /**
+     * @var string
+     */
+    private string $style;
+
+    /**
+     * @return string
+     */
+    public function getStyle(): string
+    {
+        return $this->style;
+    }
+
+    /**
+     * @param string $style
+     * @return Parameter
+     */
+    public function setStyle(string $style): Parameter
+    {
+        $this->style = $style;
+        return $this;
+    }
+
 
     /**
      * @return string

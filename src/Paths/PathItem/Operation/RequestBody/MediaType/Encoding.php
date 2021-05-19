@@ -13,10 +13,11 @@ class Encoding implements Arrayable
 {
 	use IsArrayable;
 
-	/**
-	 * @var string
-	 */
-	private string $contentType;
+    /**
+     * Encoding constructor.
+     * @param string $contentType
+     */
+    public function __construct(private string $contentType) {}
 
 	/**
 	 * @return string

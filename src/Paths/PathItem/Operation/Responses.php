@@ -2,16 +2,18 @@
 
 namespace JoshPJackson\OpenApi\Paths\PathItem\Operation;
 
+use JoshPJackson\OpenApi\Interfaces\Arrayable;
 use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\Responses\Response;
+use JoshPJackson\OpenApi\Traits\IsArrayable;
 
 /**
  * Class Responses
  * @package JoshPJackson\OpenApi\Paths\PathItem\Operation
  */
-class Responses implements \JsonSerializable
+class Responses implements Arrayable
 {
-    use CanJsonSerialise;
+    use IsArrayable;
 
     /**
      * @var array
@@ -35,5 +37,16 @@ class Responses implements \JsonSerializable
     public function getResponses() : array
     {
         return $this->responses;
+    }
+
+    public function toArray(): array
+    {
+        $responses = [];
+
+        foreach ($this->getResponses() as $response) {
+            $responses[$response->getCode()] = $response->toArray();
+        }
+
+        return $responses;
     }
 }

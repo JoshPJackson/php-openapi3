@@ -17,6 +17,8 @@ class Response implements Arrayable
 	use IsArrayable;
 	use HasRequiredFields;
 
+	public array $ignore = ['code'];
+
 	/**
 	 * @var array|string[]
 	 */
@@ -38,6 +40,12 @@ class Response implements Arrayable
 	 * @var Collection
 	 */
 	private Collection $links;
+
+    /**
+     * Response constructor.
+     * @param int $code
+     */
+	public function __construct(private int $code) {}
 
 	/**
 	 * @return string
@@ -92,4 +100,22 @@ class Response implements Arrayable
 		$this->links[] = $link;
 		return $this;
 	}
+
+    /**
+     * @return int
+     */
+    public function getCode(): int
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param int $code
+     * @return Response
+     */
+    public function setCode(int $code): Response
+    {
+        $this->code = $code;
+        return $this;
+    }
 }

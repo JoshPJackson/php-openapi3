@@ -15,25 +15,40 @@ class Paths implements Arrayable
 	use IsArrayable;
 
 	/**
-	 * @var PathItem
+	 * @var PathItem[]
 	 */
-	private PathItem $pathItem;
+	private array $pathItems;
 
 	/**
-	 * @return PathItem
+	 * @return PathItem[]
 	 */
-	public function getPathItem(): PathItem
+	public function getPathItems(): array
 	{
-		return $this->pathItem;
+		return $this->pathItems;
 	}
 
 	/**
 	 * @param PathItem $pathItem
 	 * @return Paths
 	 */
-	public function setPathItem(PathItem $pathItem): Paths
+	public function addPathItem(PathItem $pathItem): Paths
 	{
-		$this->pathItem = $pathItem;
+		$this->pathItems[] = $pathItem;
 		return $this;
 	}
+
+    /**
+     * @return array
+     * @throws \Exception
+     */
+	public function toArray(): array
+    {
+        $data = [];
+
+        foreach ($this->getPathItems() as $pathItem) {
+            $data[$pathItem->getUri()] = $pathItem->toArray();
+        }
+
+        return $data;
+    }
 }

@@ -143,9 +143,9 @@ class Schema implements Arrayable
 	protected array $not;
 
 	/**
-	 * @var array
+	 * @var array|Schema
 	 */
-	protected array $items;
+	protected array|Schema $items;
 
 	/**
 	 * @var Collection
@@ -633,10 +633,10 @@ class Schema implements Arrayable
 	}
 
 	/**
-	 * @param array $items
+	 * @param array|Schema $items
 	 * @return Schema
 	 */
-	public function setItems(array $items): Schema
+	public function setItems(array|Schema $items): Schema
 	{
 		$this->items = $items;
 		return $this;

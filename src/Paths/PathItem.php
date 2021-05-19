@@ -2,16 +2,19 @@
 
 namespace JoshPJackson\OpenApi\Paths;
 
+use JoshPJackson\OpenApi\Interfaces\Arrayable;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation;
-use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
+use JoshPJackson\OpenApi\Traits\IsArrayable;
 
 /**
  * Class PathItem
  * @package JoshPJackson\OpenApi\Paths
  */
-class PathItem implements \JsonSerializable
+class PathItem implements Arrayable
 {
-    use CanJsonSerialise;
+    use IsArrayable {
+        IsArrayable::toArray as IsArrayableToArray;
+    }
 
     /**
      * @var string
@@ -47,6 +50,15 @@ class PathItem implements \JsonSerializable
      * @var Operation
      */
     private Operation $delete;
+
+    /**
+     * PathItem constructor.
+     * @param string $uri
+     */
+    public function __construct(private string $uri)
+    {
+
+    }
 
     /**
      * @return string
@@ -172,5 +184,35 @@ class PathItem implements \JsonSerializable
     {
         $this->delete = $delete;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUri(): string
+    {
+        return $this->uri;
+    }
+
+    /**
+     * @param string $uri
+     * @return PathItem
+     */
+    public function setUri(string $uri): PathItem
+    {
+        $this->uri = $uri;
+        return $this;
+    }
+
+    /**
+     * @return array
+     * @throws \Exception
+     */
+    public function toArray(): array
+    {
+        $array = $this->IsArrayableToArray();
+        unset($array['uri']);
+
+        return $array;
     }
 }
