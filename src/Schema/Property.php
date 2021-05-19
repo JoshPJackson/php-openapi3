@@ -13,20 +13,20 @@ class Property extends Schema
 {
 	/**
 	 * Property constructor.
-	 * @param string $name
+	 * @param ?string $name
 	 * @param Type $type
 	 */
-	public function __construct(private string $name, Type $type)
+	public function __construct(private ?string $name, Type $type)
 	{
-		parent::__construct();
+		parent::__construct($this->name);
 		$this->setTypeAndFormatFromType($type);
 	}
 
-    /**
-     * @return string
-     */
-    public function getType(): string
-    {
+	/**
+	 * @return string
+	 */
+	public function getType(): string
+	{
         return $this->type;
     }
 
@@ -37,24 +37,6 @@ class Property extends Schema
     public function setType(string $type): Property
     {
         $this->type = $type;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRef(): string
-    {
-        return $this->ref;
-    }
-
-    /**
-     * @param string $ref
-     * @return Property
-     */
-    public function setRef(string $ref): Property
-    {
-        $this->ref = $ref;
         return $this;
     }
 
@@ -92,14 +74,6 @@ class Property extends Schema
     {
         $this->description = $description;
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName() : string
-    {
-        return $this->name;
     }
 
     /**

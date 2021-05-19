@@ -3,6 +3,9 @@
 namespace JoshPJackson\OpenApi\Traits;
 
 use Exception;
+use JoshPJackson\OpenApi\Collection;
+
+use function method_exists;
 
 trait IsArrayable
 {
@@ -24,7 +27,13 @@ trait IsArrayable
 					if (!is_object($value)) {
 						$jsonArray[$name] = $value;
 					} else {
-						$jsonArray[$name] = $value->toArray();
+						if (method_exists($value, 'toArray')) {
+							if ($value instanceof Collection && $value->isNotEmpty()) {
+								$jsonArray[$name] = $value->toArray();
+							} elseif (!($value instanceof Collection)) {
+								$jsonArray[$name] = $value->toArray();
+							}
+						}
 					}
 				}
 			}

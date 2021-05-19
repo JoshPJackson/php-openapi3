@@ -5,6 +5,7 @@ namespace JoshPJackson\OpenApi;
 use Exception;
 use JoshPJackson\OpenApi\Interfaces\Arrayable;
 use JoshPJackson\OpenApi\Schema\Property;
+use JoshPJackson\OpenApi\Traits\CanHaveRef;
 use JoshPJackson\OpenApi\Traits\IsArrayable;
 
 /**
@@ -14,13 +15,17 @@ use JoshPJackson\OpenApi\Traits\IsArrayable;
 class Schema implements Arrayable
 {
 	use IsArrayable {
-		toArray as IsArrayableToArray;
+		IsArrayable::toArray as IsArrayableToArray;
+	}
+
+	use CanHaveRef {
+		CanHaveRef::toArray as IsArrayableWithRef;
 	}
 
 	/**
 	 * @var bool
 	 */
-	protected bool $nullable = true;
+	protected bool $nullable = false;
 
 	/**
 	 * @var bool
@@ -118,9 +123,9 @@ class Schema implements Arrayable
 	protected string $type;
 
 	/**
-	 * @var array
+	 * @var Collection
 	 */
-	protected array $allOf;
+	protected Collection $allOf;
 
 	/**
 	 * @var array
@@ -167,10 +172,24 @@ class Schema implements Arrayable
 	 */
 	protected ?string $format;
 
-	public function __construct()
+	/**
+	 * Schema constructor.
+	 *
+	 * @var ?string $name
+	 */
+	public function __construct(private ?string $name = null)
 	{
 		$this->properties = new Collection();
 		$this->additionalProperties = new Collection();
+		$this->allOf = new Collection();
+	}
+
+	/**
+	 * @return ?string
+	 */
+	public function getName(): ?string
+	{
+		return $this->name;
 	}
 
 	/**
@@ -534,20 +553,20 @@ class Schema implements Arrayable
 	}
 
 	/**
-	 * @return array
+	 * @return Collection
 	 */
-	public function getAllOf(): array
+	public function getAllOf(): Collection
 	{
 		return $this->allOf;
 	}
 
 	/**
-	 * @param array $allOf
+	 * @param Schema $allOf
 	 * @return Schema
 	 */
-	public function setAllOf(array $allOf): Schema
+	public function addAllOf(Schema $allOf): Schema
 	{
-		$this->allOf = $allOf;
+		$this->allOf[] = $allOf;
 		return $this;
 	}
 
@@ -719,9 +738,24 @@ class Schema implements Arrayable
 	 */
 	public function toArray(): array
 	{
+		if ($this->hasRef()) {
+			return $this->IsArrayableWithRef();
+		}
+
 		$array = $this->IsArrayableToArray();
-		$array['properties'] = [];
-		$array['additionalProperties'] = [];
+		unset($array['name']);
+
+		if ($this->properties->isNotEmpty()) {
+			$array['properties'] = [];
+		}
+
+		if ($this->additionalProperties->isNotEmpty()) {
+			$array['additionalProperties'] = [];
+		}
+
+		if (!$this->nullable) {
+			unset($array['nullable']);
+		}
 
 		foreach ($this->properties as $property) {
 			$array['properties'][$property->getName()] = $property->toArray();

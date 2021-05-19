@@ -2,6 +2,7 @@
 
 namespace JoshPJackson\OpenApi;
 
+use Exception;
 use JoshPJackson\OpenApi\Interfaces\Arrayable;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\RequestBody;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\Responses\Response;
@@ -14,7 +15,9 @@ use JoshPJackson\OpenApi\Traits\IsArrayable;
  */
 class Components implements Arrayable
 {
-	use IsArrayable;
+	use IsArrayable {
+		IsArrayable::toArray as IsArrayableToArray;
+	}
 
 	/**
 	 * @var Collection
@@ -61,6 +64,9 @@ class Components implements Arrayable
 	 */
 	private Collection $callbacks;
 
+	/**
+	 * Components constructor.
+	 */
 	public function __construct()
 	{
 		$this->schemas = new Collection();
@@ -233,5 +239,25 @@ class Components implements Arrayable
 	{
 		$this->callbacks = $callbacks;
 		return $this;
+	}
+
+	/**
+	 * @return array
+	 * @throws Exception
+	 */
+	public function toArray(): array
+	{
+		$array = $this->IsArrayableToArray();
+		$schemas = [];
+
+		if (!empty($this->schemas)) {
+			foreach ($this->schemas as $schema) {
+				$schemas[$schema->getName()] = $schema->toArray();
+			}
+		}
+
+		$array['schemas'] = $schemas;
+
+		return $array;
 	}
 }

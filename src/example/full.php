@@ -43,19 +43,31 @@ $server = new Server();
 $server->setUrl('http://petstore.swagger.io/api');
 
 /* make schemas */
-$errorSchema = new Schema();
-$errorSchema->setTypeAndFormatFromType(TypeFactory::object())
-	->setRequired(['code', 'message']);
+$errorSchema = new Schema('Error');
+$newPet = new Schema('NewPet');
+$pet = new Schema('Pet');
+
+$errorSchema->setTypeAndFormatFromType(TypeFactory::object())->setRequired(['code', 'message']);
+$newPet->setTypeAndFormatFromType(TypeFactory::object())->setRequired(['name']);
 
 // add properties
 $code = new Property('code', TypeFactory::integer32());
 $message = new Property('message', TypeFactory::string());
+$name = new Property('name', TypeFactory::string());
+$tag = new Property('tag', TypeFactory::string());
 
 $errorSchema->addProperty($code)->addProperty($message);
+$newPet->addProperty($name)->addProperty($tag);
+
+$petRef = new Schema();
+$petRef->setRef('#/components/schemas/NewPet');
+$pet->addAllOf($petRef);
 
 /* make components object */
 $components = new Components();
 $components->addSchema($errorSchema);
+$components->addSchema($newPet);
+$components->addSchema($pet);
 
 /* add objects to root api object */
 $openApi->setInfo($info);

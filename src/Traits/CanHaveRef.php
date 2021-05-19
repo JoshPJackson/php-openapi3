@@ -8,23 +8,46 @@ namespace JoshPJackson\OpenApi\Traits;
  */
 trait CanHaveRef
 {
-    private $ref;
+	use IsArrayable;
 
-    /**
-     * @return mixed
-     */
-    public function getRef()
-    {
-        return $this->ref;
-    }
+	/**
+	 * @var string
+	 */
+	private string $ref = '';
 
-    /**
-     * @param mixed $ref
-     * @return CanHaveRef
-     */
-    public function setRef($ref)
-    {
-        $this->ref = $ref;
-        return $this;
-    }
+	/**
+	 * @return mixed
+	 */
+	public function getRef()
+	{
+		return $this->ref;
+	}
+
+	/**
+	 * @param mixed $ref
+	 * @return CanHaveRef
+	 */
+	public function setRef($ref)
+	{
+		$this->ref = $ref;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasRef(): bool
+	{
+		return !empty($this->getRef());
+	}
+
+	/**
+	 * @return array
+	 */
+	public function toArray(): array
+	{
+		return [
+			'$ref' => $this->getRef()
+		];
+	}
 }
