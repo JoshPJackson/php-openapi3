@@ -62,9 +62,7 @@ $pet->addAllOf($petRef);
 
 /* make components object */
 $components = new Components();
-$components->addSchema($errorSchema);
-$components->addSchema($newPet);
-$components->addSchema($pet);
+$components->addSchemas([$errorSchema, $newPet, $pet]);
 
 /* add objects to root api object */
 $openApi->setInfo($info);

@@ -97,6 +97,19 @@ class Components implements Arrayable
 		return $this;
 	}
 
+    /**
+     * @param array $schemas
+     * @return $this
+     */
+	public function addSchemas(array $schemas): Components
+    {
+        foreach ($schemas as $schema) {
+            $this->addSchema($schema);
+        }
+
+        return $this;
+    }
+
 	/**
 	 * @return Collection
 	 */
