@@ -30,21 +30,14 @@ $info->setVersion('1.0.0')
 	->setTermsOfService('http://swagger.io/terms/');
 
 // create contact item
-$contact = new Contact();
-$contact->setName('Swagger API Team')
-	->setEmail('apiteam@swagger.io')
-	->setUrl('http://swagger.io');
+$contact = new Contact('apiteam@swagger.io', 'Swagger API Team', 'http://swagger.io');
 
 // create license item
-$license = new License();
-$license->setName('Apache 2.0')
-	->setUrl('https://www.apache.org/license/LICENSE-2.0.html');
-
+$license = new License('Apache 2.0', 'https://www.apache.org/license/LICENSE-2.0.html');
 $info->setContact($contact)->setLicense($license);
 
 /* make servers */
-$server = new Server();
-$server->setUrl('http://petstore.swagger.io/api');
+$server = new Server('http://petstore.swagger.io/api');
 
 /* make schemas */
 $errorSchema = new Schema('Error');
@@ -139,3 +132,86 @@ $openApi->setPaths($paths);
 $fh = fopen(__DIR__ . '/full.json', 'w+');
 fwrite($fh, $openApi->jsonSerialize());
 fclose($fh);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -23,14 +23,14 @@ class License implements Arrayable
 	];
 
     /**
-     * @var string
+     * License constructor.
+     * @param string $name
+     * @param string $url
      */
-    private string $name;
+    public function __construct(private string $name, private string $url)
+    {
 
-    /**
-     * @var string
-     */
-    private string $url;
+    }
 
     /**
      * @return string

@@ -13,20 +13,16 @@ class Contact implements Arrayable
 {
 	use IsArrayable;
 
-	/**
-	 * @var string
-	 */
-	private string $name;
-
-	/**
-	 * @var string
-     */
-    private string $url;
-
     /**
-     * @var string
+     * Contact constructor.
+     * @param string $email
+     * @param string $name
+     * @param ?string $url
      */
-    private string $email;
+    public function __construct(private string $email, private string $name, private ?string $url = null)
+    {
+
+    }
 
     /**
      * @return string
@@ -47,7 +43,7 @@ class Contact implements Arrayable
     }
 
     /**
-     * @return string
+     * @return ?string
      */
     public function getUrl(): string
     {
@@ -55,10 +51,10 @@ class Contact implements Arrayable
     }
 
     /**
-     * @param string $url
+     * @param ?string $url
      * @return Contact
      */
-    public function setUrl(string $url): Contact
+    public function setUrl(?string $url): Contact
     {
         $this->url = $url;
         return $this;

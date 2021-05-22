@@ -23,14 +23,14 @@ class Server implements Arrayable
 	];
 
     /**
-     * @var string
+     * Server constructor.
+     * @param string $url
+     * @param string $description
      */
-    private string $url;
+	public function __construct(private string $url, private string $description = '')
+    {
 
-    /**
-     * @var string
-     */
-    private string $description;
+    }
 
     /**
      * @return string

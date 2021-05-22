@@ -5,9 +5,9 @@
     "description": "A sample API that uses a petstore as an example to demonstrate features in the OpenAPI 3.0 specification",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
+      "email": "apiteam@swagger.io",
       "name": "Swagger API Team",
-      "url": "http://swagger.io",
-      "email": "apiteam@swagger.io"
+      "url": "http://swagger.io"
     },
     "license": {
       "name": "Apache 2.0",
