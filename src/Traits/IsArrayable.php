@@ -21,6 +21,8 @@ trait IsArrayable
 			}
 		}
 
+		$jsonArray = [];
+
 		foreach (get_object_vars($this) as $name => $value) {
 			if (!in_array($name, ['requiredFields', 'ignore']) && (empty($this->ignore) || !in_array($name, $this->ignore))) {
 				if (!empty($value)) {
