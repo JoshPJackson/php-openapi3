@@ -9,21 +9,17 @@ namespace JoshPJackson\OpenApi\Traits;
 trait HasRequiredFields
 {
     /**
-     * @var array
-     */
-    protected array $required = [];
-
-    /**
      * @return bool
      */
     protected function validate() : bool
     {
-        foreach ($this->required as $requiredField) {
-            if (empty($requiredField)) {
-                return false;
+        if (!empty($this->requiredFields)) {
+            foreach ($this->requiredFields as $requiredField) {
+                if (empty($requiredField)) {
+                    return false;
+                }
             }
         }
-
         return true;
     }
 }

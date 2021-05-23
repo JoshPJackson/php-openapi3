@@ -2,17 +2,20 @@
 
 namespace JoshPJackson\OpenApi\Paths\PathItem;
 
+use JoshPJackson\OpenApi\Collection;
+use JoshPJackson\OpenApi\Interfaces\Arrayable;
+use JoshPJackson\OpenApi\Paths\PathItem\Operation\Parameter;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\RequestBody;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\Responses;
-use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
+use JoshPJackson\OpenApi\Traits\IsArrayable;
 
 /**
  * Class Operation
  * @package JoshPJackson\OpenApi\Paths\PathItem
  */
-class Operation implements \JsonSerializable
+class Operation implements Arrayable
 {
-    use CanJsonSerialise;
+    use IsArrayable;
 
     /**
      * @var array
@@ -35,9 +38,9 @@ class Operation implements \JsonSerializable
     private string $operationId;
 
     /**
-     * @var array
+     * @var Collection
      */
-    private array $parameters;
+    private Collection $parameters;
 
     /**
      * @var RequestBody
@@ -53,6 +56,14 @@ class Operation implements \JsonSerializable
      * @var array
      */
     private array $securities;
+
+    /**
+     * Operation constructor.
+     */
+    public function __construct()
+    {
+        $this->parameters = new Collection();
+    }
 
     /**
      * @return array
@@ -127,20 +138,20 @@ class Operation implements \JsonSerializable
     }
 
     /**
-     * @return array
+     * @return Collection
      */
-    public function getParameters(): array
+    public function getParameters(): Collection
     {
         return $this->parameters;
     }
 
     /**
-     * @param array $parameters
-     * @return Operation
+     * @param Parameter $parameters
+     * @return $this
      */
-    public function setParameters(array $parameters): Operation
+    public function addParameter(Parameter $parameters): Operation
     {
-        $this->parameters = $parameters;
+        $this->parameters[] = $parameters;
         return $this;
     }
 

@@ -2,83 +2,120 @@
 
 namespace JoshPJackson\OpenApi\Paths\PathItem\Operation\Responses;
 
+use JoshPJackson\OpenApi\Collection;
+use JoshPJackson\OpenApi\Interfaces\Arrayable;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\RequestBody\MediaType;
-use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
+use JoshPJackson\OpenApi\Traits\HasRequiredFields;
+use JoshPJackson\OpenApi\Traits\IsArrayable;
 
 /**
  * Class Response
  * @package JoshPJackson\OpenApi\Paths\PathItem\Operation\Responses
  */
-class Response implements \JsonSerializable
+class Response implements Arrayable
 {
-    use CanJsonSerialise;
+	use IsArrayable;
+	use HasRequiredFields;
+
+	public array $ignore = ['code'];
+
+	/**
+	 * @var array|string[]
+	 */
+	protected array $requiredFields = [
+		'description'
+	];
+
+	/**
+	 * @var string
+	 */
+	private string $description;
+
+	/**
+	 * @var MediaType
+	 */
+	private MediaType $content;
+
+	/**
+	 * @var Collection
+	 */
+	private Collection $links;
 
     /**
-     * @var string
+     * Response constructor.
+     * @param int $code
      */
-    private string $description;
+	public function __construct(private int $code) {}
+
+	/**
+	 * @return string
+	 */
+	public function getDescription(): string
+	{
+		return $this->description;
+	}
+
+	/**
+	 * @param string $description
+	 * @return Response
+	 */
+	public function setDescription(string $description): Response
+	{
+		$this->description = $description;
+		return $this;
+	}
+
+	/**
+	 * @return MediaType
+	 */
+	public function getContent(): MediaType
+	{
+		return $this->content;
+	}
+
+	/**
+	 * @param MediaType $content
+	 * @return Response
+	 */
+	public function setContent(MediaType $content): Response
+	{
+		$this->content = $content;
+		return $this;
+	}
+
+	/**
+	 * @return Collection
+	 */
+	public function getLinks(): Collection
+	{
+		return $this->links;
+	}
+
+	/**
+	 * @param string $link
+	 * @return Response
+	 */
+	public function addLink(string $link): Response
+	{
+		$this->links[] = $link;
+		return $this;
+	}
 
     /**
-     * @var MediaType
+     * @return int
      */
-    private MediaType $content;
-
-    /**
-     * @var array
-     */
-    private array $links;
-
-    /**
-     * @return string
-     */
-    public function getDescription(): string
+    public function getCode(): int
     {
-        return $this->description;
+        return $this->code;
     }
 
     /**
-     * @param string $description
+     * @param int $code
      * @return Response
      */
-    public function setDescription(string $description): Response
+    public function setCode(int $code): Response
     {
-        $this->description = $description;
-        return $this;
-    }
-
-    /**
-     * @return MediaType
-     */
-    public function getContent(): MediaType
-    {
-        return $this->content;
-    }
-
-    /**
-     * @param MediaType $content
-     * @return Response
-     */
-    public function setContent(MediaType $content): Response
-    {
-        $this->content = $content;
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getLinks(): array
-    {
-        return $this->links;
-    }
-
-    /**
-     * @param string $link
-     * @return Response
-     */
-    public function addLink(string $link): Response
-    {
-        $this->links[] = $link;
+        $this->code = $code;
         return $this;
     }
 }

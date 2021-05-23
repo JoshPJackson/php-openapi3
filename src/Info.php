@@ -2,28 +2,29 @@
 
 namespace JoshPJackson\OpenApi;
 
-use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
 use JoshPJackson\OpenApi\Info\Contact;
 use JoshPJackson\OpenApi\Info\License;
+use JoshPJackson\OpenApi\Interfaces\Arrayable;
 use JoshPJackson\OpenApi\Traits\HasRequiredFields;
+use JoshPJackson\OpenApi\Traits\IsArrayable;
 
 /**
  * Class Info
  * @package JoshPJackson\OpenApi
  */
-class Info implements \JsonSerializable
+class Info implements Arrayable
 {
-    use CanJsonSerialise;
-    use HasRequiredFields;
+	use IsArrayable;
+	use HasRequiredFields;
 
-    protected array $required = [
-        'title',
-        'version'
-    ];
+	protected array $requiredFields = [
+		'title',
+		'version'
+	];
 
-    /**
-     * @var string
-     */
+	/**
+	 * @var string
+	 */
     private string $title;
 
     /**

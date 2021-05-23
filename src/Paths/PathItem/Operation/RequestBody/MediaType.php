@@ -2,21 +2,25 @@
 
 namespace JoshPJackson\OpenApi\Paths\PathItem\Operation\RequestBody;
 
-use JoshPJackson\OpenApi\Schema;
+use JoshPJackson\OpenApi\Interfaces\Arrayable;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\RequestBody\MediaType\Encoding;
-use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
+use JoshPJackson\OpenApi\Schema;
+use JoshPJackson\OpenApi\Traits\IsArrayable;
+use function PHPUnit\Framework\returnArgument;
 
-class MediaType implements \JsonSerializable
+class MediaType implements Arrayable
 {
-    use CanJsonSerialise;
+	use IsArrayable {
+	    IsArrayable::toArray as IsArrayableToArray;
+    }
 
-    /**
-     * @var Schema
-     */
-    private Schema $schema;
+	/**
+	 * @var Schema
+	 */
+	private Schema $schema;
 
-    /**
-     * @var
+	/**
+	 * @var
      */
     private $example;
 
@@ -77,5 +81,14 @@ class MediaType implements \JsonSerializable
     {
         $this->encoding = $encoding;
         return $this;
+    }
+
+    public function toArray(): array
+    {
+        $array = $this->IsArrayableToArray();
+        unset($array['encoding']);
+        return [
+            $this->getEncoding()->getContentType() => $array
+        ];
     }
 }

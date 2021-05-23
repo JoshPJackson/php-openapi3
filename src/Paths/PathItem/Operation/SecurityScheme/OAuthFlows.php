@@ -7,22 +7,23 @@ use JoshPJackson\OpenApi\Paths\PathItem\Operation\SecurityScheme\OAuthFlows\Clie
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\SecurityScheme\OAuthFlows\ImplicitFlow;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\SecurityScheme\OAuthFlows\PasswordFlow;
 use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
+use JsonSerializable;
 
 /**
  * Class OAuthFlows
  * @package JoshPJackson\OpenApi\Paths\PathItem\Operation\SecurityScheme
  */
-class OAuthFlows implements \JsonSerializable
+class OAuthFlows implements JsonSerializable
 {
-    use CanJsonSerialise;
+	use CanJsonSerialise;
 
-    /**
-     * @var ImplicitFlow
-     */
-    private ImplicitFlow $implicitFlow;
+	/**
+	 * @var ImplicitFlow
+	 */
+	private ImplicitFlow $implicitFlow;
 
-    /**
-     * @var PasswordFlow
+	/**
+	 * @var PasswordFlow
      */
     private PasswordFlow $passwordFlow;
 
@@ -98,30 +99,32 @@ class OAuthFlows implements \JsonSerializable
         return $this->authorizationCodeFlow;
     }
 
-    /**
-     * @param AuthorizationCodeFlow $authorizationCodeFlow
-     * @return OAuthFlows
-     */
-    public function setAuthorizationCodeFlow(AuthorizationCodeFlow $authorizationCodeFlow): OAuthFlows
-    {
-        $this->authorizationCodeFlow = $authorizationCodeFlow;
-        return $this;
-    }
+	/**
+	 * @param AuthorizationCodeFlow $authorizationCodeFlow
+	 * @return OAuthFlows
+	 */
+	public function setAuthorizationCodeFlow(AuthorizationCodeFlow $authorizationCodeFlow): OAuthFlows
+	{
+		$this->authorizationCodeFlow = $authorizationCodeFlow;
+		return $this;
+	}
 
-    /**
-     * Override trait to only include the first set OAuth flow
-     *
-     * @return string
-     */
-    public function jsonSerialize() : string
-    {
-        foreach (get_object_vars($this) as $name => $value) {
-            if (!empty($value)) {
-                $this->jsonArray[$name] = $value;
-                return json_encode($this->jsonArray);
-            }
-        }
+	/**
+	 * Override trait to only include the first set OAuth flow
+	 *
+	 * @return array
+	 */
+	public function toArray(): array
+	{
+		$jsonArray = [];
 
-        return json_encode([]);
-    }
+		foreach (get_object_vars($this) as $name => $value) {
+			if (!empty($value)) {
+				$jsonArray[$name] = $value;
+				return $jsonArray;
+			}
+		}
+
+		return [];
+	}
 }

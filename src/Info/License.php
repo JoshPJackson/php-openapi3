@@ -2,25 +2,35 @@
 
 namespace JoshPJackson\OpenApi\Info;
 
-use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
+use JoshPJackson\OpenApi\Interfaces\Arrayable;
+use JoshPJackson\OpenApi\Traits\HasRequiredFields;
+use JoshPJackson\OpenApi\Traits\IsArrayable;
 
 /**
  * Class License
  * @package JoshPJackson\OpenApi\Info
  */
-class License implements \JsonSerializable
+class License implements Arrayable
 {
-    use CanJsonSerialise;
+	use IsArrayable;
+	use HasRequiredFields;
+
+	/**
+	 * @var array|string[]
+	 */
+	protected array $requiredFields = [
+		'name'
+	];
 
     /**
-     * @var string
+     * License constructor.
+     * @param string $name
+     * @param string $url
      */
-    private string $name;
+    public function __construct(private string $name, private string $url)
+    {
 
-    /**
-     * @var string
-     */
-    private string $url;
+    }
 
     /**
      * @return string

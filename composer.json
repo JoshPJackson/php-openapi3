@@ -6,15 +6,18 @@
     "require-dev": {
         "phpunit/phpunit": "^9.5"
     },
-    "authors": [
-        {
-            "name": "Josh Jackson",
-            "email": "joshpjackson12@gmail.com"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "JoshPJackson\\OpenApi\\": "src/"
-        }
+  "authors": [
+    {
+      "name": "Josh Jackson",
+      "email": "joshpjackson12@gmail.com"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "JoshPJackson\\OpenApi\\": "src/"
+    }
+  },
+  "require": {
+    "illuminate/support": "^8.40"
+  }
 }

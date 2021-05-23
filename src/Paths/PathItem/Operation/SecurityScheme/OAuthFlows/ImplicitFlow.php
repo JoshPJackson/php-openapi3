@@ -12,7 +12,7 @@ class ImplicitFlow extends OAuthFlow
 {
     use HasRequiredFields;
 
-    protected array $required = [
+    protected array $requiredFields = [
         'authorizationFlow'
     ];
 

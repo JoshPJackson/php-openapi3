@@ -2,30 +2,27 @@
 
 namespace JoshPJackson\OpenApi\Info;
 
-use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
+use JoshPJackson\OpenApi\Interfaces\Arrayable;
+use JoshPJackson\OpenApi\Traits\IsArrayable;
 
 /**
  * Class Contact
  * @package JoshPJackson\OpenApi\Info
  */
-class Contact implements \JsonSerializable
+class Contact implements Arrayable
 {
-    use CanJsonSerialise;
+	use IsArrayable;
 
     /**
-     * @var string
+     * Contact constructor.
+     * @param string $email
+     * @param string $name
+     * @param ?string $url
      */
-    private string $name;
+    public function __construct(private string $email, private string $name, private ?string $url = null)
+    {
 
-    /**
-     * @var string
-     */
-    private string $url;
-
-    /**
-     * @var string
-     */
-    private string $email;
+    }
 
     /**
      * @return string
@@ -46,7 +43,7 @@ class Contact implements \JsonSerializable
     }
 
     /**
-     * @return string
+     * @return ?string
      */
     public function getUrl(): string
     {
@@ -54,10 +51,10 @@ class Contact implements \JsonSerializable
     }
 
     /**
-     * @param string $url
+     * @param ?string $url
      * @return Contact
      */
-    public function setUrl(string $url): Contact
+    public function setUrl(?string $url): Contact
     {
         $this->url = $url;
         return $this;

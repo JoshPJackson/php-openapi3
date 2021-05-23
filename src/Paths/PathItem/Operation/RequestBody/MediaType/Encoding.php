@@ -2,23 +2,25 @@
 
 namespace JoshPJackson\OpenApi\Paths\PathItem\Operation\RequestBody\MediaType;
 
-use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
+use JoshPJackson\OpenApi\Interfaces\Arrayable;
+use JoshPJackson\OpenApi\Traits\IsArrayable;
 
 /**
  * Class Encoding
  * @package JoshPJackson\OpenApi\Paths\PathItem\Operation\RequestBody\MediaType
  */
-class Encoding implements \JsonSerializable
+class Encoding implements Arrayable
 {
-    use CanJsonSerialise;
+	use IsArrayable;
 
     /**
-     * @var string
+     * Encoding constructor.
+     * @param string $contentType
      */
-    private string $contentType;
+    public function __construct(private string $contentType) {}
 
-    /**
-     * @return string
+	/**
+	 * @return string
      */
     public function getContentType(): string
     {

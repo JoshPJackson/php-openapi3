@@ -2,25 +2,26 @@
 
 namespace JoshPJackson\OpenApi;
 
-use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\SecurityScheme;
+use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
 use JoshPJackson\OpenApi\Traits\HasRequiredFields;
+use JsonSerializable;
 
 /**
  * Class OpenApi
  * @package JoshPJackson\OpenApi
  */
-class OpenApi implements \JsonSerializable
+class OpenApi implements JsonSerializable
 {
-    use CanJsonSerialise;
-    use HasRequiredFields;
+	use CanJsonSerialise;
+	use HasRequiredFields;
 
-    /**
-     * @var array|string[]
-     */
-    protected array $required = [
-        'openapi',
-        'info'
+	/**
+	 * @var array|string[]
+	 */
+	protected array $requiredFields = [
+		'openapi',
+		'info'
     ];
 
     /**
@@ -33,10 +34,10 @@ class OpenApi implements \JsonSerializable
      */
     private Info $info;
 
-    /**
-     * @var array
-     */
-    private array $servers;
+	/**
+	 * @var Collection
+	 */
+	private Collection $servers;
 
     /**
      * @var Components
@@ -48,25 +49,34 @@ class OpenApi implements \JsonSerializable
      */
     private Paths $paths;
 
-    /**
-     * @var array
-     */
-    private array $securities;
+	/**
+	 * @var Collection
+	 */
+	private Collection $securities;
 
-    /**
-     * @var array
-     */
-    private array $tags;
+	/**
+	 * @var Collection
+	 */
+	private Collection $tags;
 
-    /**
-     * @return string
-     */
-    public function getOpenapi(): string
-    {
-        return $this->openapi;
-    }
+	/**
+	 * OpenApi constructor.
+	 */
+	public function __construct()
+	{
+		$this->servers = new Collection();
+		$this->securities = new Collection();
+	}
 
-    /**
+	/**
+	 * @return string
+	 */
+	public function getOpenapi(): string
+	{
+		return $this->openapi;
+	}
+
+	/**
      * @param string $openapi
      * @return OpenApi
      */
@@ -94,13 +104,13 @@ class OpenApi implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getServers(): array
-    {
-        return $this->servers;
-    }
+	/**
+	 * @return Collection
+	 */
+	public function getServers(): Collection
+	{
+		return $this->servers;
+	}
 
     /**
      * @param Server $server
@@ -130,13 +140,13 @@ class OpenApi implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getSecurities(): array
-    {
-        return $this->securities;
-    }
+	/**
+	 * @return Collection
+	 */
+	public function getSecurities(): Collection
+	{
+		return $this->securities;
+	}
 
     /**
      * @param SecurityScheme $security
@@ -148,13 +158,13 @@ class OpenApi implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getTags(): array
-    {
-        return $this->tags;
-    }
+	/**
+	 * @return Collection
+	 */
+	public function getTags(): Collection
+	{
+		return $this->tags;
+	}
 
     /**
      * @param Tag $tag

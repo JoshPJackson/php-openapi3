@@ -4,6 +4,7 @@ namespace JoshPJackson\OpenApi\Paths\PathItem\Operation;
 
 use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\RequestBody\MediaType;
+use JoshPJackson\OpenApi\Traits\HasRequiredFields;
 
 /**
  * Class RequestBody
@@ -12,6 +13,14 @@ use JoshPJackson\OpenApi\Paths\PathItem\Operation\RequestBody\MediaType;
 class RequestBody implements \JsonSerializable
 {
     use CanJsonSerialise;
+    use HasRequiredFields;
+
+    /**
+     * @var array|string[]
+     */
+    protected array $requiredFields = [
+        'content'
+    ];
 
     /**
      * @var string

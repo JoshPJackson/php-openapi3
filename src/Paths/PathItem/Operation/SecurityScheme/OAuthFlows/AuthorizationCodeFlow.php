@@ -15,7 +15,7 @@ class AuthorizationCodeFlow extends OAuthFlow
     /**
      * @var array|string[]
      */
-    protected array $required = [
+    protected array $requiredFields = [
         'authorizationUrl',
         'tokenUrl'
     ];

@@ -2,37 +2,53 @@
 
 namespace JoshPJackson\OpenApi;
 
+use Illuminate\Contracts\Support\Arrayable;
 use JoshPJackson\OpenApi\Paths\PathItem;
-use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
+use JoshPJackson\OpenApi\Traits\IsArrayable;
 
 /**
  * Class Paths
  * @package JoshPJackson\OpenApi
  */
-class Paths implements \JsonSerializable
+class Paths implements Arrayable
 {
-    use CanJsonSerialise;
+	use IsArrayable;
+
+	/**
+	 * @var PathItem[]
+	 */
+	private array $pathItems;
+
+	/**
+	 * @return PathItem[]
+	 */
+	public function getPathItems(): array
+	{
+		return $this->pathItems;
+	}
+
+	/**
+	 * @param PathItem $pathItem
+	 * @return Paths
+	 */
+	public function addPathItem(PathItem $pathItem): Paths
+	{
+		$this->pathItems[] = $pathItem;
+		return $this;
+	}
 
     /**
-     * @var PathItem
+     * @return array
+     * @throws \Exception
      */
-    private PathItem $pathItem;
-
-    /**
-     * @return PathItem
-     */
-    public function getPathItem(): PathItem
+	public function toArray(): array
     {
-        return $this->pathItem;
-    }
+        $data = [];
 
-    /**
-     * @param PathItem $pathItem
-     * @return Paths
-     */
-    public function setPathItem(PathItem $pathItem): Paths
-    {
-        $this->pathItem = $pathItem;
-        return $this;
+        foreach ($this->getPathItems() as $pathItem) {
+            $data[$pathItem->getUri()] = $pathItem->toArray();
+        }
+
+        return $data;
     }
 }
