@@ -2,7 +2,7 @@
 
 namespace JoshPJackson\OpenApi\Paths\PathItem\Operation;
 
-use JoshPJackson\OpenApi\Paths\PathItem\operation\SecurityScheme\OAuthFlows;
+use JoshPJackson\OpenApi\Paths\PathItem\Operation\SecurityScheme\OAuthFlows;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\SecurityScheme\Type;
 use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
 use JoshPJackson\OpenApi\Traits\HasRequiredFields;
