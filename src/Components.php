@@ -269,7 +269,16 @@ class Components implements Arrayable
 			}
 		}
 
+		$responses = [];
+
+		if (!empty($this->responses)) {
+			foreach ($this->responses as $response) {
+				$responses[$response->getCode()] = $response->toArray();
+			}
+		}
+
 		$array['schemas'] = $schemas;
+		$array['responses'] = $responses;
 
 		return $array;
 	}
