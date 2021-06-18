@@ -25,6 +25,11 @@ trait IsArrayable
 
 		foreach (get_object_vars($this) as $name => $value) {
 			if (!in_array($name, ['requiredFields', 'ignore']) && (empty($this->ignore) || !in_array($name, $this->ignore))) {
+
+			    if ($name === 'ref') {
+			        $name = '$ref';
+                }
+
 				if (!empty($value)) {
 					if (!is_object($value)) {
 						$jsonArray[$name] = $value;

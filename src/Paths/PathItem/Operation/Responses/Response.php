@@ -5,6 +5,7 @@ namespace JoshPJackson\OpenApi\Paths\PathItem\Operation\Responses;
 use JoshPJackson\OpenApi\Collection;
 use JoshPJackson\OpenApi\Interfaces\Arrayable;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\RequestBody\MediaType;
+use JoshPJackson\OpenApi\Traits\CanHaveRef;
 use JoshPJackson\OpenApi\Traits\HasRequiredFields;
 use JoshPJackson\OpenApi\Traits\IsArrayable;
 
@@ -14,8 +15,9 @@ use JoshPJackson\OpenApi\Traits\IsArrayable;
  */
 class Response implements Arrayable
 {
-	use IsArrayable;
 	use HasRequiredFields;
+	use IsArrayable;
+	use CanHaveRef;
 
 	public array $ignore = ['code'];
 

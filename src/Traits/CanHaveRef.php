@@ -8,8 +8,6 @@ namespace JoshPJackson\OpenApi\Traits;
  */
 trait CanHaveRef
 {
-	use IsArrayable;
-
 	/**
 	 * @var string
 	 */
@@ -39,15 +37,5 @@ trait CanHaveRef
 	public function hasRef(): bool
 	{
 		return !empty($this->getRef());
-	}
-
-	/**
-	 * @return array
-	 */
-	public function toArray(): array
-	{
-		return [
-			'$ref' => $this->getRef()
-		];
 	}
 }

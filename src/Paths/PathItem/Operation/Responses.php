@@ -3,7 +3,6 @@
 namespace JoshPJackson\OpenApi\Paths\PathItem\Operation;
 
 use JoshPJackson\OpenApi\Interfaces\Arrayable;
-use JoshPJackson\OpenApi\Traits\CanJsonSerialise;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\Responses\Response;
 use JoshPJackson\OpenApi\Traits\IsArrayable;
 
