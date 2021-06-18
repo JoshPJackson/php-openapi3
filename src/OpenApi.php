@@ -52,7 +52,7 @@ class OpenApi implements JsonSerializable
 	/**
 	 * @var Collection
 	 */
-	private Collection $securities;
+	private Collection $security;
 
 	/**
 	 * @var Collection
@@ -65,7 +65,7 @@ class OpenApi implements JsonSerializable
 	public function __construct()
 	{
 		$this->servers = new Collection();
-		$this->securities = new Collection();
+		$this->security = new Collection();
 	}
 
 	/**
@@ -143,9 +143,9 @@ class OpenApi implements JsonSerializable
 	/**
 	 * @return Collection
 	 */
-	public function getSecurities(): Collection
+	public function getSecurity(): Collection
 	{
-		return $this->securities;
+		return $this->security;
 	}
 
     /**
@@ -154,7 +154,7 @@ class OpenApi implements JsonSerializable
      */
     public function addSecurity(SecurityScheme $security): OpenApi
     {
-        $this->securities[] = $security;
+        $this->security[] = $security;
         return $this;
     }
 
