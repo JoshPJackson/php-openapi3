@@ -20,6 +20,6 @@ trait CanJsonSerialise
 	 */
 	public function jsonSerialize() : string
 	{
-		return json_encode($this->toArray(), JSON_UNESCAPED_SLASHES);
+		return json_encode($this->toArray(), JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
 	}
 }
