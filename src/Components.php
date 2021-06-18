@@ -262,7 +262,6 @@ class Components implements Arrayable
 	{
 		$array = $this->IsArrayableToArray();
 		$schemas = [];
-		$responses = [];
 
 		if (!empty($this->schemas)) {
 			foreach ($this->schemas as $schema) {
@@ -270,14 +269,16 @@ class Components implements Arrayable
 			}
 		}
 
+		$responses = [];
+
 		if (!empty($this->responses)) {
-		    foreach ($this->responses as $response) {
-		        $responses[$response->getCode()] = $response->toArray();
-            }
-        }
+			foreach ($this->responses as $response) {
+				$responses[$response->getCode()] = $response->toArray();
+			}
+		}
 
 		$array['schemas'] = $schemas;
-        $array['responses'] = $responses;
+		$array['responses'] = $responses;
 
 		return $array;
 	}
