@@ -3,6 +3,7 @@
 namespace JoshPJackson\OpenApi;
 
 use Exception;
+use Illuminate\Support\Str;
 use JoshPJackson\OpenApi\Interfaces\Arrayable;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\RequestBody;
 use JoshPJackson\OpenApi\Paths\PathItem\Operation\Responses\Response;
@@ -265,7 +266,7 @@ class Components implements Arrayable
 
 		if (!empty($this->schemas)) {
 			foreach ($this->schemas as $schema) {
-				$schemas[$schema->getName()] = $schema->toArray();
+				$schemas[Str::slug($schema->getName())] = $schema->toArray();
 			}
 		}
 
