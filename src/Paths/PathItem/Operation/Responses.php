@@ -43,7 +43,13 @@ class Responses implements Arrayable
         $responses = [];
 
         foreach ($this->getResponses() as $response) {
-            $responses[$response->getCode()] = $response->toArray();
+            if ($response->hasRef()) {
+                $responses[$response->getCode()] = [
+                    '$ref' => $response->getRef()
+                ];
+            } else {
+                $responses[$response->getCode()] = $response->toArray();
+            }
         }
 
         return $responses;
