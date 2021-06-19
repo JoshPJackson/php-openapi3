@@ -736,7 +736,9 @@ class Schema implements Arrayable
 	public function toArray(): array
 	{
 		if ($this->hasRef()) {
-			return $this->IsArrayableWithRef();
+			return [
+			    '$ref' => $this->getRef()
+            ];
 		}
 
 		$array = $this->IsArrayableToArray();
