@@ -189,6 +189,17 @@ class Schema implements Arrayable
 		return $this->name;
 	}
 
+    /**
+     * @param string $name
+     * @return Schema
+     */
+	public function setName(string $name): Schema
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
 	/**
 	 * @return bool
 	 */
