@@ -17,6 +17,7 @@ class Schema implements Arrayable
 	use IsArrayable {
 		IsArrayable::toArray as IsArrayableToArray;
 	}
+	use CanHaveRef;
 
 	/**
 	 * @var bool
