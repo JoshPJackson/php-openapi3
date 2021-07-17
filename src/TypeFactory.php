@@ -117,4 +117,9 @@ class TypeFactory
 	{
 		return self::create('object');
 	}
+
+	public static function array(): Type
+    {
+        return self::create('array');
+    }
 }
